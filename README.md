@@ -148,6 +148,8 @@ cp .env.example .env  # add your API keys
 docker compose run --rm tradingagents
 ```
 
+The Compose file passes supported settings from `.env` or the shell into the container; it does not require `.env` to exist. In Portainer, deploy the repository as a stack and add the provider API key and any desired `TRADINGAGENTS_*` settings under the stack's environment variables. The stack variables are passed to the app container; do not commit credentials to the repository. For Azure OpenAI, add its `AZURE_OPENAI_*` settings as stack environment variables as well.
+
 After updating the repository, rebuild the image with `docker compose build`.
 
 Results, reports, the memory log and the cache live in the `tradingagents_data` volume. To keep them in a folder on the host instead, create the folder and point `TRADINGAGENTS_DATA_DIR` at it, in `.env` or the shell: `mkdir -p data && TRADINGAGENTS_DATA_DIR=./data docker compose run --rm tradingagents`.
